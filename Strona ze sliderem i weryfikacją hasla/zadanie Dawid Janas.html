@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8"/>
+	<title>Dawid Janas</title>
+	
+	
+	
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript">
+	
+	
+	function wyswietl()
+	{
+		document.getElementById("pole1").style.display = "block";
+		document.getElementById("pole2").style.display = "block";
+		document.getElementById("Pokaz").style.display = "block";
+	}
+		
+	function sprawdz()
+	{
+		var haslo = document.getElementById("haslo").value;
+		
+		if(haslo == "Janas")
+		{
+		document.getElementById("wynik").innerHTML="Dobrze";
+        wyswietl();
+		}
+		else 
+		{
+		document.getElementById("wynik").innerHTML="Żle";
+		}
+				
+	}
+	
+	var numer = Math.floor(Math.random()*3)+1;
+
+	var timer1= 0;
+	var timer2= 0;
+
+
+	function ustawslajd(nrslajdu)
+
+	{
+		clearTimeout(timer1);
+		clearTimeout(timer2);
+		numer= nrslajdu - 1;
+
+		schowaj();
+		setTimeOut("zmienslajd()", 500);
+	}
+	
+	function schowaj()
+	{
+		$("#slider").fadeOut(500);
+	}
+
+	function zmienslajd()
+	{
+		numer++; 
+		if (numer>3) numer=1;
+		
+		var plik = "<img src=\"zdj/zdj" + numer + ".png\" />";
+		
+		document.getElementById("slider").innerHTML = plik;
+		$("#slider").fadeIn(500);
+
+		timer1= setTimeout("zmienslajd()",5000);
+		timer2= setTimeout("schowaj()",4500);
+	}
+	
+	function wypisz()
+	{
+				var liczba1 = document.getElementById("pole1").value;
+				var liczba2 = document.getElementById("pole2").value;
+				var napis = "";
+				
+				
+				for (i=liczba1; i<=liczba2; i++)
+				{
+					napis = napis + i + " ";
+				}
+				
+				document.getElementById("oblicz").innerHTML = napis;
+	
+	}
+
+
+	</script>
+</head>
+<body bgcolor="pale blue" onload="zmienslajd()">
+
+
+	<center>
+	<span onclick="ustawslajd(1)" style="cursor:pointer;">[ 1 ]</span>
+	<span onclick="ustawslajd(2)" style="cursor:pointer;">[ 2 ]</span>
+	<span onclick="ustawslajd(3)" style="cursor:pointer;">[ 3 ]</span>
+	<div id="slider"></div>
+	<br/>
+	
+	<input type="text" Id="haslo"/>
+	<input type="submit" value="Sprawdz" onclick="sprawdz()"/>
+	<div id="wynik"></div>
+	<br/>
+	
+	<input type="text" id="pole1" style="display:none;"/><br/>
+	<input type="text" id="pole2" style="display:none;" /><br/>
+	<input type="submit" value="Pokaż" id="Pokaz" onclick="wypisz()" style="display:none;" />
+	<br/>
+	<div id="oblicz"></div>
+	</center>
+	
+	
+	
+	
+	
+	
+</body>
+</html>
